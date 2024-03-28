@@ -56,5 +56,4 @@ if __name__ == '__main__':
         plt.ylabel('Success Rate')
         plt.savefig(f"{output_dir}/graph_s={s}.png")
         plt.close()
-
-'''====================================== T H E   E N D ======================================'''
+        print(f"Graph for s={s} is saved in {output_dir}")

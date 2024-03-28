@@ -1,5 +1,6 @@
 import random
 import numpy as np
+import sys
 
 class MonteCarloSimulation:
     def __init__(self, n, p0, pi, num_iteration, output_file):
@@ -18,7 +19,10 @@ class MonteCarloSimulation:
 
         for i in range(self.num_iteration):
             num_neutrons = self.simulate_generation(p0, p1, p2, p3)
-            counters[num_neutrons if num_neutrons < 4 else 4] += 1
+            if num_neutrons < 4:
+                counters[num_neutrons] += 1
+            else:
+                counters[4] += 1
 
         for i in range(5):
             self.probability[i] = counters[i] / self.num_iteration
@@ -53,7 +57,7 @@ class MonteCarloSimulation:
             file.write("\n")
 
 if __name__ == '__main__':
-    n = 10
+    n = int(sys.argv[1])
     p0 = 0.4825
     pi = [(0.2126) * (0.5893) ** (i-1) for i in range(1, 4)]
     prob_sum = sum(pi) + p0
